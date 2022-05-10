@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>登录</title>
+</head>
+<body>
+<div id="app">
+    <el-form label-position="top" label-width="100px"
+             :model="formLabelAlign" style="max-width: 460px">
+        <el-form-item label="用户名">
+            <el-input v-model="formLabelAlign.userName"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input type="password" show-password v-model="formLabelAlign.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">登录</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+</body>
+<!-- 引入静态资源 -->
+<!--<script th:src="@{/js/babel.min.js}" type="application/javascript"></script>-->
+<!--<script th:src="@{/js/polyfill.js}" type="application/javascript"></script>-->
+<script th:src="@{/js/vue.global.js}"></script>
+<script th:src="@{/js/axios.js}"></script>
+<script th:src="@{/js/element-plus.js}"></script>
+<link th:href="@{/css/element-plus.css}" rel="stylesheet"/>
+<!--<script src="https://unpkg.com/vue@next"></script>-->
+<!--<link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">-->
+<!--<script src="https://unpkg.com/element-plus"></script>-->
+<script>
+    const App = {
+        data() {
+            return {
+                formLabelAlign: {
+                    userName: "",
+                    password: "",
+                }
+            };
+        },
+        methods:{
+            onSubmit() {
+                const _this = this;
+                axios.post('/acc/doLogin',_this.formLabelAlign).then(function (response) {
+                    console.log(response)
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    };
+    const app = Vue.createApp(App);
+    app.use(ElementPlus)
+    app.mount("#app");
+
+</script>
+</html>
