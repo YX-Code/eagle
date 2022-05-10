@@ -1,21 +1,15 @@
 package cn.eagle.json.jackson;
 
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.SneakyThrows;
-import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-@UtilityClass
-@Slf4j
-public class JacksonUtil {
+public class JacksonDemo {
     private static ObjectMapper objectMapper = new ObjectMapper();
     
     static {
@@ -30,16 +24,15 @@ public class JacksonUtil {
      * @param objectMapper ObjectMapper 对象
      */
     public static void init(ObjectMapper objectMapper) {
-        JacksonUtil.objectMapper = objectMapper;
+        JacksonDemo.objectMapper = objectMapper;
     }
     
-    @SneakyThrows
-    public String toJsonString(Object object) {
+    public String toJsonString(Object object) throws JsonProcessingException {
         return objectMapper.writeValueAsString(object);
     }
     
     @SneakyThrows
-    public byte[] toJsonByte(Object object) {
+    public byte[] toJsonByte(Object object) throws JsonProcessingException {
         return objectMapper.writeValueAsBytes(object);
     }
     
